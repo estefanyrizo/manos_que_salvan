@@ -7,6 +7,7 @@ from base64 import b64encode
 from imagekitio import ImageKit
 from imagekitio.models.UploadFileRequestOptions import UploadFileRequestOptions
 import docraptor
+import random
 
 ik = ImageKit(private_key = 'private_Qp14eZvK/IRhm765ygkevTj6Qf0=',
     public_key = 'public_hbzaPES1Spn6HNAwv9KUELJz1ro=',
@@ -53,8 +54,7 @@ def subirImagen(imagen, folderimg):
     # return f'<img src="data:image/png;base64,{imagen}">'
     # print(imagen)
 
-    res = ik.upload(file=imagen, file_name=request.form.get(
-        "codigo"), options=UploadFileRequestOptions(folder=f"Ganado/{folderimg}"))
+    res = ik.upload(file=imagen, file_name = f"{request.form.get('nombre_mascota')} {random.randint(1,100000)}", options=UploadFileRequestOptions(folder=f"Mascotas/{folderimg}"))
     # El options es opcional de ponerlo y tiene varios parametros configurables, util como para custom_metadata = {"marca": "Gucci", "color":"rojo"}
     # print(res.url)
     # El url listo para guardar en la base de datos y mostrarlo en el html desde el link
