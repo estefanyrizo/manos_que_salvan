@@ -14,12 +14,14 @@ Mi cuenta
                 <div class="card card-user">
                     <div class="card-body">
                         <div class="author">
-                            <a href="#">
-                                <img class="avatar border-gray"
-                                    src="{{ user_info.imagen_url }}"
-                                    alt="...">
-                                <h5 class="title">{{ user_info['nombres'] }} {{ user_info.apellidos }}</h5>
-                            </a>
+                            <img id="img-preview" class="avatar border-gray mx-auto d-block mb-2"
+                                src="{{ user_info.img_url if user_info.img_url else 'https://th.bing.com/th/id/OIP.vqcRLdblXvejwFsJuR2ZcQHaHa?w=800&h=800&rs=1&pid=ImgDetMain' }}">
+                            <label for="img-uploader">
+                                Seleccionar foto: <i class="fa fa-upload"></i>
+                            </label>
+                            <input class="form-control mb-4" type="file" name="foto" id="img-uploader" accept="image/*"
+                                hidden>
+                            <h5 class="title">{{ user_info['nombres'] }} {{ user_info.apellidos }}</h5>
                         </div>
                         <p class="description text-center">
                             {{ biografia }}
@@ -109,13 +111,15 @@ Mi cuenta
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Nombre</label>
-                                        <input type="text" class="form-control" placeholder="Nombre" value="{{ user_info.nombres }}">
+                                        <input type="text" class="form-control" placeholder="Nombre"
+                                            value="{{ user_info.nombres }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Apellido</label>
-                                        <input type="text" class="form-control" placeholder="Apellido" value="{{ user_info.apellidos }}">
+                                        <input type="text" class="form-control" placeholder="Apellido"
+                                            value="{{ user_info.apellidos }}">
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +127,8 @@ Mi cuenta
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Correo</label>
-                                        <input type="email" class="form-control" placeholder="Correo" value="{{ user_info.email }}">
+                                        <input type="email" class="form-control" placeholder="Correo"
+                                            value="{{ user_info.email }}">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -131,7 +136,8 @@ Mi cuenta
                                         <label>Departamento</label>
                                         <!-- <input type="text" class="form-control" placeholder="Departamento"
                                             value="{{ user_info.nombre_departamento }}"> -->
-                                        <select class="form-control" id="departamento_id" name="departamento_id"></select>
+                                        <select class="form-control" id="departamento_id"
+                                            name="departamento_id"></select>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -155,8 +161,7 @@ Mi cuenta
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Sobre mi</label>
-                                        <textarea
-                                            class="form-control textarea">{{ user_info.biografia }}</textarea>
+                                        <textarea class="form-control textarea">{{ user_info.biografia }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -353,11 +358,11 @@ Mi cuenta
 </div>
 
 <script>
-    const departamentos_municipios = {{ departamentos_municipios|safe }};
+    const departamentos_municipios = {{ departamentos_municipios| safe }};
     depending_selects(departamentos_municipios, 'departamento_id', 'municipio_id');
 
     const departamentoSeleccionado = '{{ user_info.departamento_id }}';  // Valor del departamento ya seleccionado
-    const municipioSeleccionado = '{{ user_info.municipio_id }}';  
+    const municipioSeleccionado = '{{ user_info.municipio_id }}';
 
     console.log(municipioSeleccionado, departamentoSeleccionado);
 
