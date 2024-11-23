@@ -149,9 +149,14 @@ def login():
     else:
         return render_template("login.html")
 
-@app.route("/info_mascota")
-def info_mascota(): 
-    return render_template("info_mascota.html")
+@app.route("/info_mascota/<id>/")
+def info_mascota(id): 
+    mascotas_adopcion = db.execute(f'''
+                                   SELECT p.descripcion, p.id, p.nombre_mascota, r.nombre as nombre_raza, p.imagen_url, t.nombre as tipo FROM publicaciones as p
+                                   JOIN razas_mascotas as r ON p.raza_mascota_id = r.id JOIN tipos_mascotas as t ON r.tipo_mascota_id = t.id
+                                   WHERE p.id = {id}
+                                   ''')
+    return render_template("info_mascota.html", mascotas_adopcion=mascotas_adopcion)
 
 @app.route("/nueva_mascota_adop", methods=['GET', 'POST'])
 @login_required
