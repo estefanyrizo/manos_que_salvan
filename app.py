@@ -10,7 +10,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from flask import Flask, flash, redirect, render_template, request, session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
-from helpers import login_required, subirImagen, validarDouble, validarString, subirArchivo, crearpdf
+from helpers import login_required, subirImagen, validarDouble, validarString, subirArchivo
 from flask import jsonify, send_file
 from sqlalchemy.sql import text
 from helpers import login_required
@@ -116,20 +116,20 @@ def register():
 def login():
     """Log user in"""
 
-    # Forget any user_id
-    session.clear()
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
+        # Forget any user_id
+        session.clear()
         # Ensure username was submitted
         if not request.form.get("nombre_usuario"):
             # return apology("Debe proveer un nombre de usuario", 403)
-            flash('Debe proveer un nombre de usuario', "error")
+            flash('Debe proveer un nombre de usuario', 'error')
             return redirect("/login")
 
         # Ensure password was submitted
         if not request.form.get("contrasena"):
             # return apology("Debe proveer una contraseña", 403)
-            flash('Debe proveer una contraseña', "error")
+            flash('Debe proveer una contraseña', 'error')
             return redirect("/login")
 
         # Query database for username
