@@ -99,7 +99,7 @@ Mi cuenta
                         <h4 class="text-center">Editar perfil</h4>
                     </div>
                     <div class="card-body">
-                        <form action="/mi_cuenta" method="PUT">
+                        <form action="/mi_cuenta" method="POST">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -111,15 +111,23 @@ Mi cuenta
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Nombre</label>
+<<<<<<< HEAD
                                         <input type="text" class="form-control" placeholder="Nombre"
                                             value="{{ user_info.nombres }}">
+=======
+                                        <input type="text" class="form-control" placeholder="Nombre" value="{{ user_info.nombres }}" name="nombres">
+>>>>>>> 4899179f9c5e628446f68d2105fae84c9f4a749a
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Apellido</label>
+<<<<<<< HEAD
                                         <input type="text" class="form-control" placeholder="Apellido"
                                             value="{{ user_info.apellidos }}">
+=======
+                                        <input type="text" class="form-control" placeholder="Apellido" value="{{ user_info.apellidos }}" name="apellidos">
+>>>>>>> 4899179f9c5e628446f68d2105fae84c9f4a749a
                                     </div>
                                 </div>
                             </div>
@@ -127,8 +135,12 @@ Mi cuenta
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Correo</label>
+<<<<<<< HEAD
                                         <input type="email" class="form-control" placeholder="Correo"
                                             value="{{ user_info.email }}">
+=======
+                                        <input type="email" class="form-control" placeholder="Correo" value="{{ user_info.email }}" name="email">
+>>>>>>> 4899179f9c5e628446f68d2105fae84c9f4a749a
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -153,7 +165,7 @@ Mi cuenta
                                     <div class="form-group">
                                         <label>Dirección</label>
                                         <input type="text" class="form-control" placeholder="Dirección"
-                                            value="{{ user_info.direccion }}">
+                                            value="{{ user_info.direccion }}" name="direccion">
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +173,12 @@ Mi cuenta
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Sobre mi</label>
+<<<<<<< HEAD
                                         <textarea class="form-control textarea">{{ user_info.biografia }}</textarea>
+=======
+                                        <textarea
+                                            class="form-control textarea" name="biografia">{{ user_info.biografia }}</textarea>
+>>>>>>> 4899179f9c5e628446f68d2105fae84c9f4a749a
                                     </div>
                                 </div>
                             </div>

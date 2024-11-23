@@ -262,10 +262,11 @@ def mascota_encon():
 def maltrato_animal(): 
     return render_template("maltrato_animal.html")
 
-@app.route("/mi_cuenta", methods=['GET', 'PUT'])
+@app.route("/mi_cuenta", methods=['GET', 'POST'])
 @login_required
 def mi_cuenta(): 
-    if request.method == 'PUT':
+    if request.method == 'POST':
+        print(2)
         email = request.form.get("email")
         nombres = request.form.get("nombres")
         apellidos = request.form.get("apellidos")
@@ -273,22 +274,29 @@ def mi_cuenta():
         biografia = request.form.get("biografia")
         municipio_id = request.form.get("municipio_id")      
         
+        print(f"Email: {email}")
+        print(f"Nombres: {nombres}")
+        print(f"Apellidos: {apellidos}")
+        print(f"Dirección: {direccion}")
+        print(f"Biografía: {biografia}")
+        print(f"Municipio ID: {municipio_id}")
 
         if not email or not nombres or not apellidos or not direccion or not biografia or not municipio_id:
             # return apology("Llena todos los campos")
             flash('Llena todos los campos', 'error')
             return redirect("/mi_cuenta")
         
+        print(1)
         usuario_id = session.get('user_id')  # O el valor que corresponda para obtener el ID del usuario
 
         # Realizar el UPDATE en la base de datos
         db.execute('''
             UPDATE usuarios
-            SET email = ?, nombres = ?, apellidos = ?, direccion = ?, biografia = ?, municipio_id = ?,
+            SET email = ?, nombres = ?, apellidos = ?, direccion = ?, biografia = ?, municipio_id = ?
             WHERE id = ?
-        ''', (
+        ''', 
             email, nombres, apellidos, direccion, biografia, municipio_id,  usuario_id
-        ))
+        )
 
         # Después de la actualización, redirigir al usuario con un mensaje de éxito
         flash('Datos actualizados correctamente', 'exito')
