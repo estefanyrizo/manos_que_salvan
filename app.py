@@ -129,8 +129,6 @@ def register():
                 'id_hijo': row['municipio_id'],
                 'nombre_hijo': row['municipio_nombre']
             })
-            
-        print(departamentos_municipios_var)
         
         return render_template("register.html", departamentos_municipios=json.dumps(departamentos_municipios_var))
 
@@ -191,7 +189,7 @@ def nueva_mascota_adop():
         color_mascota = request.form.get("color_mascota")
         tamano_mascota_metros = request.form.get("tamano_mascota_metros")
         peso_mascota_kg = request.form.get("peso_mascota_kg")
-        fecha_evento_ocurrido = request.form.get("fecha_evento_ocurrido")
+        fecha_evento_ocurrido = request.form.get("fecha_nacimiento")
         # ubicacion_evento_ocurrido = request.form.get("ubicacion_evento_ocurrido")
         procedencia_id = request.form.get("procedencia_id")
         
@@ -205,7 +203,7 @@ def nueva_mascota_adop():
             peso_mascota_kg, fecha_evento_ocurrido, procedencia_id
         ]):
             flash('Todos los campos son obligatorios', 'error')
-            return redirect("/crear_publicacion_form")
+            return redirect("/nueva_mascota_adop")
 
         # Insertar la nueva publicación
         try:
@@ -214,7 +212,7 @@ def nueva_mascota_adop():
                 (descripcion, imagen_url, usuario_id, tipo_publicacion_id, nombre_mascota, raza_mascota_id, 
                 color_mascota, tamano_mascota_metros, peso_mascota_kg, fecha_evento_ocurrido, 
                 procedencia_id, creado_en, actualizado_en) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
                 descripcion, imagen_url, usuario_id, tipo_publicacion_id, nombre_mascota, raza_mascota_id,
                 color_mascota, tamano_mascota_metros, peso_mascota_kg, fecha_evento_ocurrido,
@@ -224,9 +222,44 @@ def nueva_mascota_adop():
         except Exception as e:
             flash(f'Error al crear la publicación: {e}', 'error')
 
-        return redirect("/crear_publicacion_form")
+        return redirect("/nueva_mascota_adop")
     else:
-        return render_template("nueva_mascota_adop.html")
+        # Ejecutar la consulta SQL
+        tipos_mascotas_razas = db.execute('''
+            SELECT 
+                tipos_mascotas.id AS tipo_mascota_id,
+                tipos_mascotas.nombre AS tipo_mascota_nombre,
+                razas_mascotas.id AS raza_mascota_id,
+                razas_mascotas.nombre AS raza_mascota_nombre
+            FROM 
+                tipos_mascotas
+            INNER JOIN 
+                razas_mascotas 
+            ON 
+                tipos_mascotas.id = razas_mascotas.tipo_mascota_id;
+        ''')
+
+        # Crear la estructura de datos adaptada
+        tipos_mascotas_razas_var = {}
+
+        for row in tipos_mascotas_razas:
+            # Si el tipo de mascota no está en el diccionario, lo inicializamos con una lista vacía para 'hijos'
+            if row['tipo_mascota_nombre'] not in tipos_mascotas_razas_var:
+                tipos_mascotas_razas_var[row['tipo_mascota_nombre']] = {
+                    'id_padre': row['tipo_mascota_id'],
+                    'hijos': []  # Inicializamos 'hijos' como una lista vacía
+                }
+            
+            # Agregar las razas como hijos (a la lista 'hijos')
+            tipos_mascotas_razas_var[row['tipo_mascota_nombre']]['hijos'].append({
+                'id_hijo': row['raza_mascota_id'],
+                'nombre_hijo': row['raza_mascota_nombre']
+            })
+            
+        procedencias = db.execute('''SELECT * FROM opciones_procedencia_adopcion''');
+
+        # Ahora la variable tipos_mascotas_razas_var tiene la estructura deseada
+        return render_template("nueva_mascota_adop.html", tipos_mascotas_razas=json.dumps(tipos_mascotas_razas_var), procedencias=procedencias)
 
 @app.route("/registrar_mascota_desaparecida")
 @login_required

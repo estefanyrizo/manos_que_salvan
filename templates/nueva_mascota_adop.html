@@ -18,63 +18,56 @@ Mascota en adopción
                         <div class="row">
                             <!-- Columna de la información de la mascota -->
                             <div class="col-md-8">
-                                <form class="mascotaForm" action="/ingresarmascota" method="post"
+                                <form class="mascotaForm" action="/nueva_mascota_adop" method="post"
                                     enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-xl-6 mb-3">
                                             <label for="nombre">Nombre de la mascota</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre"
+                                            <input type="text" class="form-control" id="nombre" name="nombre_mascota"
                                                 placeholder="Nombre de la mascota" required>
                                         </div>
                                         <div class="col-xl-6 mb-3">
                                             <label for="raza">Tipo de mascota</label>
-                                            <select class="form-control" id="raza" name="raza" required>
-                                                <option disabled="" selected="" value="">Seleccione un tipo</option>
-                                                {% for item in tipo %}
-                                                <option value="{{item[0]}}">{{item[1]}}</option>
-                                                {% endfor %}
+                                            <select class="form-control" id="tipo_mascota_id" name="tipo_mascota_id" required>
+            
                                             </select>
                                         </div>
                                         <div class="col-xl-6 mb-3">
                                             <label for="raza">Raza</label>
-                                            <select class="form-control" id="raza" name="raza" required>
-                                                <option disabled="" selected="" value="">Seleccione una raza</option>
-                                                {% for item in razas %}
-                                                <option value="{{item[0]}}">{{item[1]}}</option>
-                                                {% endfor %}
+                                            <select class="form-control" id="raza_mascota_id" name="raza_mascota_id" required>
                                             </select>
                                         </div>
 
                                         <div class="col-xl-6 mb-3">
                                             <label for="fechaNacimiento">Fecha de Nacimiento</label>
                                             <input type="date" class="form-control" id="fechaNacimiento"
-                                                name="fechaNacimiento" required>
+                                                name="fecha_nacimiento" required>
                                         </div>
 
                                         <div class="col-xl-2 mb-3">
                                             <label for="tamaño">Tamaño (m)</label>
-                                            <input type="text" class="form-control" id="tamaño" name="tamaño"
+                                            <input type="text" class="form-control" id="tamaño" name="tamano_mascota_metros"
                                                 placeholder="Tamaño" required>
                                         </div>
 
                                         <div class="col-xl-2 mb-3">
                                             <label for="peso">Peso (kg)</label>
-                                            <input type="text" class="form-control" id="peso" name="peso"
+                                            <input type="text" class="form-control" id="peso" name="peso_mascota_kg"
                                                 placeholder="Peso" required>
                                         </div>
 
                                         <div class="col-xl-3 mb-3">
                                             <label for="color">Color</label>
-                                            <input type="text" class="form-control" id="color" name="color"
+                                            <input type="text" class="form-control" id="color" name="color_mascota"
                                                 placeholder="Color" required>
                                         </div>
 
                                         <div class="col-xl-5 mb-3">
                                             <label for="procedencia">Procedencia</label>
-                                            <select class="form-control" id="procedencia" name="procedencia" required>
+                                            <select class="form-control" id="procedencia" name="procedencia_id" required>
                                                 <option disabled="" selected="" value="">Seleccione el origen</option>
-                                                {% for item in origen %}
-                                                <option value="{{item[0]}}">{{item[1]}}</option>
+                                                {% for item in procedencias %}
+                                                <option value="{{item['id']}}">{{item['nombre_opcion_procedencia']}}</option>
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -82,7 +75,7 @@ Mascota en adopción
                                         <div class="col-xl-12 mb-1">
                                             <label for="comentario">Información adicional</label>
                                             <input class="form-control mb-3" type="text"
-                                                placeholder="Información adicional sobre la mascota" name="comentario">
+                                                placeholder="Información adicional sobre la mascota" name="descripcion">
                                         </div>
                                     </div>
                             </div>
@@ -106,4 +99,9 @@ Mascota en adopción
         </div>
     </div>
 </div>
+
+<script>
+    const mascotas_razas = {{ tipos_mascotas_razas|safe }};
+    depending_selects(mascotas_razas, 'tipo_mascota_id','raza_mascota_id');
+</script>
 {% endblock %}
