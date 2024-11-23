@@ -181,7 +181,7 @@ def nueva_mascota_adop():
         # Obtener datos del formulario
         # titulo = request.form.get("titulo")
         descripcion = request.form.get("descripcion")
-        imagen_url = None
+        imagen_url = 'ddd'
         
         tipo_publicacion_id = 1
         nombre_mascota = request.form.get("nombre_mascota")
@@ -213,11 +213,11 @@ def nueva_mascota_adop():
                 color_mascota, tamano_mascota_metros, peso_mascota_kg, fecha_evento_ocurrido, 
                 procedencia_id, creado_en, actualizado_en) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ''', (
+            ''', 
                 descripcion, imagen_url, usuario_id, tipo_publicacion_id, nombre_mascota, raza_mascota_id,
                 color_mascota, tamano_mascota_metros, peso_mascota_kg, fecha_evento_ocurrido,
                 procedencia_id, datetime.datetime.now(), datetime.datetime.now()
-            ))
+            )
             flash('Publicación creada exitosamente', 'exito')
         except Exception as e:
             flash(f'Error al crear la publicación: {e}', 'error')
