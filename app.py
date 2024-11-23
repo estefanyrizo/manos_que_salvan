@@ -44,7 +44,7 @@ db = SQL("sqlite:///manos_que_salvan.db")
 def home():
     
     mascotas_adopcion = db.execute('''
-                                   SELECT p.id, p.nombre_mascota, r.nombre as nombre_raza FROM publicaciones as p
+                                   SELECT p.id, p.nombre_mascota, r.nombre as nombre_raza , p.imagen_url FROM publicaciones as p
                                    JOIN razas_mascotas as r ON p.raza_mascota_id = r.id
                                    WHERE tipo_publicacion_id = 1
                                    ''')
