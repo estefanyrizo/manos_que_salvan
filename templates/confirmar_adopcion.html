@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+Iniciar sesi&oacute;n
+
+{% endblock %}
+
+{% block main %}
+<!-- Adoptions Start -->
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-12 table-responsive mb-5">
+            <table class="table table-bordered text-center mb-0">
+                <thead class="bg-secondary text-dark">
+                    <tr>
+                        <th>Foto</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Raza</th>
+                        <th>Edad</th>
+                        <th>Confirmar adopci&oacute;n</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    <tr>
+                        <td class="align-middle"><img src="img/pet-1.jpg" alt="Pet 1" style="width: 50px;"></td>
+                        <td class="align-middle">Max</td>
+                        <td class="align-middle">Perros</td>
+                        <td class="align-middle">Golden Retriever</td>
+                        <td class="align-middle">2 years</td>
+                        <td class="align-middle">
+                            <button type="button" class="btn btn-outline-primary py-md-2 px-md-3" data-bs-toggle="modal"
+                                data-bs-target="#confirmar-adop">
+                                Confirmar adopci&oacute;n
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Adoptions End -->
+
+<!-- Modal inicio -->
+<!-- Modal -->
+<div class="modal fade" id="confirmar-adop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Detalles de la mascota</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-center">
+                            <img src="img/pet-1.jpg" alt="Pet Image"
+                                style="width: 100px; height: 100px; border-radius: 50%;">
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                           <h6>Nombre</h6>
+                            <p >Max</h6>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Raza</h6>
+                            <p>Golden Retriever</p>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Edad</h6>
+                            <p class="">2 years</p>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Estado de salud</h6>
+                            <p class="">Vaccinated</p>
+                        </div>
+                        <div>
+                            <h6>Informaci&oacute;n adicional</h6>
+                            <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Inventore quos aliquid temporibus doloremque quo tenetur est reiciendis quaerat, earum
+                                doloribus excepturi beatae reprehenderit laboriosam quis, voluptas, fugiat iste esse!
+                                Iure?</p>
+                        </div>
+                        <div>
+                            <h6>Requisitos de adopci&oacute;n</h6>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item px-0">
+                                    Sit erat duo lorem duo ea consetetur, et eirmod takimata.
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Duo amet accusam eirmod nonumy stet et et stet eirmod.
+                                </li>
+                                <li class="list-group-item px-0">
+                                    Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
+                                </li>
+                              </ul> 
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal fin -->
+
+{% endblock %}

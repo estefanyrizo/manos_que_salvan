@@ -152,6 +152,13 @@
     /* Ajustar la altura máxima si es necesario */
 }
 
+.tipos-masc {
+    display: flex;
+    justify-content: center;
+    max-height: 300px;
+    /* Ajustar la altura máxima si es necesario */
+}
+
 #img-upload-bar {
     color: #B0C4DE;
 }
@@ -177,7 +184,7 @@
     overflow: hidden;
     display: flex;
     justify-content: center;
-  }
+}
 
 .card-user .avatar {
     width: 124px;
@@ -2934,7 +2941,7 @@ fieldset:disabled a.btn {
 .show>.btn-primary.dropdown-toggle {
     color: #fff;
     background-color: #4682B4;
-    border-color: #bd726b;
+    border-color: #4682B4;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus,

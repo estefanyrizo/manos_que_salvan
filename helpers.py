@@ -8,9 +8,9 @@ from imagekitio import ImageKit
 from imagekitio.models.UploadFileRequestOptions import UploadFileRequestOptions
 import docraptor
 
-ik = ImageKit(private_key='private_pbBN7H3s6r1YGqTsxPQqdelGb38=',
-                public_key='public_rKkJyqI11fEPBRHq/2QD3PyJJwo=',
-                url_endpoint='https://ik.imagekit.io/JefferssonVMT')
+ik = ImageKit(private_key = 'private_Qp14eZvK/IRhm765ygkevTj6Qf0=',
+    public_key = 'public_hbzaPES1Spn6HNAwv9KUELJz1ro=',
+    url_endpoint = 'https://ik.imagekit.io/mi0xwh4ct')
 
 doc_api = docraptor.DocApi()
 doc_api.api_client.configuration.username = '23md2lJdruKB9SQuJ2Pj'
