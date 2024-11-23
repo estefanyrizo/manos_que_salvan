@@ -43,6 +43,16 @@ db = SQL("sqlite:///manos_que_salvan.db")
 def home():
     return render_template("index.html")
 
+@app.route("/logout")
+def logout():
+    """Log user out"""
+
+    # Forget any user_id
+    session.clear()
+
+    # Redirect user to login form
+    return redirect("/")
+
 @app.route("/register", methods=["GET", "POST"])
 def register(): 
     if request.method == "POST":
@@ -95,7 +105,7 @@ def register():
             (nombre_usuario, email, contrasena, nombres, apellidos, direccion, biografia, municipio_id, creado_en) 
             VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)''', nombre_usuario, email, generate_password_hash(contrasena), nombres, apellidos, direccion, biografia, '1', datetime.datetime.now())
 
-        flash('Registado exitosamente', 'exito')
+        flash('Registrado exitosamente', 'exito')
         return redirect("/register")
 
     else:
@@ -108,10 +118,8 @@ def login():
 
     # Forget any user_id
     session.clear()
-
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-
         # Ensure username was submitted
         if not request.form.get("nombre_usuario"):
             # return apology("Debe proveer un nombre de usuario", 403)
@@ -119,23 +127,20 @@ def login():
             return redirect("/login")
 
         # Ensure password was submitted
-        elif not request.form.get("contrasena"):
+        if not request.form.get("contrasena"):
             # return apology("Debe proveer una contraseña", 403)
             flash('Debe proveer una contraseña', "error")
             return redirect("/login")
 
         # Query database for username
-        rows = db.execute("SELECT * FROM usuarios WHERE nombre_usuario = ? OR WHERE email = ? LIMIT 1", request.form.get("nombre_usuario"), request.form.get("nombre_usuario"))
-
+        rows = db.execute("SELECT * FROM usuarios WHERE nombre_usuario = ? OR email = ? LIMIT 1", request.form.get("nombre_usuario"), request.form.get("nombre_usuario"))
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["contrasena"], request.form.get("contrasena")):
             # return apology("Credenciales Inválidas", 403)
             flash('Credenciales inválidas', "error")
             return redirect("/login")
-
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
-        print('funciona dog ' + session["user_id"])
 
         # Redirect user to home page
         return redirect("/")
