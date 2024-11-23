@@ -187,7 +187,7 @@ def nueva_mascota_adop():
         # Obtener datos del formulario
         # titulo = request.form.get("titulo")
         descripcion = request.form.get("descripcion")
-        imagen_url = 'ddd'
+        imagen_url = request.files["foto"]
         
         tipo_publicacion_id = 1
         nombre_mascota = request.form.get("nombre_mascota")
@@ -206,10 +206,12 @@ def nueva_mascota_adop():
         if not all([
             descripcion,
             nombre_mascota, raza_mascota_id, color_mascota, tamano_mascota_metros,
-            peso_mascota_kg, fecha_evento_ocurrido, procedencia_id
+            peso_mascota_kg, fecha_evento_ocurrido, procedencia_id, imagen_url
         ]):
             flash('Todos los campos son obligatorios', 'error')
             return redirect("/nueva_mascota_adop")
+        
+        imagen_url = subirImagen(request.files["foto"], "adopciones")
 
         # Insertar la nueva publicación
         try:
