@@ -115,13 +115,13 @@ def login():
         # Ensure username was submitted
         if not request.form.get("nombre_usuario"):
             # return apology("Debe proveer un nombre de usuario", 403)
-            flash('Debe proveer un nombre de usuario')
+            flash('Debe proveer un nombre de usuario', "error")
             return redirect("/login")
 
         # Ensure password was submitted
         elif not request.form.get("contrasena"):
             # return apology("Debe proveer una contraseña", 403)
-            flash('Debe proveer una contraseña')
+            flash('Debe proveer una contraseña', "error")
             return redirect("/login")
 
         # Query database for username
@@ -130,7 +130,7 @@ def login():
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["contrasena"], request.form.get("contrasena")):
             # return apology("Credenciales Inválidas", 403)
-            flash('Credenciales Inválidas')
+            flash('Credenciales inválidas', "error")
             return redirect("/login")
 
         # Remember which user has logged in
