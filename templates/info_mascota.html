@@ -7,42 +7,43 @@ inicio
 {% block main %}
 
 <!-- Info mascota inicio -->
+{% for mascota in mascotas_adopcion %}
 <div class="container-fluid">
-    <div class="row px-xl-5">   
+    <div class="row px-xl-5">
         <div class="col-lg-5">
-            <div id="product-carousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner border">
-                    <div class="carousel-item active">
-                        <img class="w-100 h-100" src="img/product-1.jpg" alt="Image">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="w-100 h-100" src="img/product-2.jpg" alt="Image">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="w-100 h-100" src="img/product-3.jpg" alt="Image">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="w-100 h-100" src="img/product-4.jpg" alt="Image">
+            <div>
+                <div>
+                    <div class=>
+                        <img class="img-masc" src="{{ mascota.imagen_url }}" alt="Image">
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
-                    <i class="fa fa-2x fa-angle-left text-dark"></i>
-                </a>
-                <a class="carousel-control-next" href="#product-carousel" data-slide="next">
-                    <i class="fa fa-2x fa-angle-right text-dark"></i>
-                </a>
             </div>
         </div>
 
         <div class="col-lg-7 pb-5">
-            <h3 class="font-weight-semi-bold">Nombre mascota</h3>
-            <p class="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit clita ea. Sanc invidunt ipsum et, labore clita lorem magna lorem ut. Erat lorem duo dolor no sea nonumy. Accus labore stet, est lorem sit diam sea et justo, amet at lorem et eirmod ipsum diam et rebum kasd rebum.</p>
+            <h3 class="font-weight-semi-bold mb-4">{{ mascota.nombre_mascota }}</h3>
+            <div class="d-flex justify-content-between mb-3">
+                <h6>Tipo</h6>
+                <p class="">{{ mascota.tipo }}</p>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <h6>Raza</h6>
+                <p>{{ mascota.nombre_raza }}</p>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <h6>Edad</h6>
+                <p class="">2 años</p>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <h6>Estado de salud</h6>
+                <p class="">Vacunado</p>
+            </div>
             <div class="d-flex align-items-center mb-4 pt-2">
                 <div class="input-group quantity mr-3" style="width: 100px;">
                     <input type="text" class="form-control bg-secondary text-center" value="1">
                     <div class="input-group-btn">
-                        <button class="btn btn-primary btn-minus" >
-                        <i class="fa fa-heart"></i>
+                        <button class="btn btn-primary btn-minus">
+                            <i class="fa fa-heart"></i>
                         </button>
                     </div>
                 </div>
@@ -50,7 +51,7 @@ inicio
             </div>
         </div>
     </div>
-    <div class="row px-xl-5">
+    <div class="row px-xl-5 mb-3 mt-3">
         <div class="col">
             <div class="nav nav-tabs justify-content-center border-secondary mb-4">
                 <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Informaci&oacute;n</a>
@@ -60,43 +61,44 @@ inicio
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab-pane-1">
                     <h4 class="mb-3">Informaci&oacute;n</h4>
-                    <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
-                    <p>Dolore magna est eirmod sanctus dolor, amet diam et eirmod et ipsum. Amet dolore tempor consetetur sed lorem dolor sit lorem tempor. Gubergren amet amet labore sadipscing clita clita diam clita. Sea amet et sed ipsum lorem elitr et, amet et labore voluptua sit rebum. Ea erat sed et diam takimata sed justo. Magna takimata justo et amet magna et.</p>
+                    <p>{{ mascota.descripcion }}</p>
                 </div>
                 <div class="tab-pane fade" id="tab-pane-2">
                     <h4 class="mb-3">Requisitos de adopci&oacute;n</h4>
                     <div class="row">
                         <div class="col-md-6">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item px-0">
-                                    Sit erat duo lorem duo ea consetetur, et eirmod takimata.
-                                </li>
-                                <li class="list-group-item px-0">
-                                    Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
-                                </li>
-                                <li class="list-group-item px-0">
-                                    Duo amet accusam eirmod nonumy stet et et stet eirmod.
-                                </li>
-                                <li class="list-group-item px-0">
-                                    Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
-                                </li>
-                              </ul> 
+                                <li><strong>Capacidad económica:</strong> El adoptante debe tener los recursos para
+                                    cubrir los gastos básicos, como alimentación, visitas al veterinario, medicinas y
+                                    otros cuidados necesarios.</li>
+                                <li><strong>Edad mínima del adoptante:</strong> El adoptante debe ser mayor de 18 años
+                                    para garantizar que tiene la responsabilidad necesaria para cuidar de la mascota. Si
+                                    es menor de 18 años, debe contar con el permiso y supervisión de un adulto.</li>
+                                <li><strong>Experiencia previa con mascotas:</strong> Es recomendable que el adoptante
+                                    haya tenido experiencia cuidando animales.</li>
+
+                                <li><strong>Tiempo y atención:</strong> El adoptante debe estar dispuesto a dedicar
+                                    tiempo suficiente para el cuidado y ejercicio de la mascota.</li>
+                                <li><strong>Compromiso a largo plazo:</strong> La adopción es un compromiso a largo
+                                    plazo, por lo que se espera que el adoptante pueda cuidar de la mascota durante toda
+                                    su vida.</li>
+                            </ul>
                         </div>
                         <div class="col-md-6">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item px-0">
-                                    Sit erat duo lorem duo ea consetetur, et eirmod takimata.
-                                </li>
-                                <li class="list-group-item px-0">
-                                    Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
-                                </li>
-                                <li class="list-group-item px-0">
-                                    Duo amet accusam eirmod nonumy stet et et stet eirmod.
-                                </li>
-                                <li class="list-group-item px-0">
-                                    Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
-                                </li>
-                              </ul> 
+                                <li><strong>Vivienda adecuada:</strong> El adoptante debe contar con un hogar seguro y
+                                    adecuado para el tipo de mascota que se va a adoptar (espacio suficiente, cercado
+                                    seguro para perros, etc.).</li>
+                                <li><strong>Visita previa al hogar:</strong> Se realizará una visita al hogar del
+                                    adoptante para asegurarse de que es un ambiente adecuado para la mascota.</li>
+                                <li><strong>Vacunas y esterilización:</strong> La mascota debe estar al día con sus
+                                    vacunas y debe ser esterilizada antes de la adopción.</li>
+                                <li><strong>Contrato de adopción:</strong> El adoptante deberá firmar un contrato de
+                                    adopción donde se compromete a cuidar responsablemente de la mascota y a informarnos
+                                    si en algún momento ya no puede mantenerla.</li>
+                                <li><strong>Seguimiento:</strong> Se podrá hacer un seguimiento periódico para asegurar
+                                    que la mascota esté siendo bien cuidada en su nuevo hogar.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -105,10 +107,11 @@ inicio
                         <div class="col-md-6">
                             <h4 class="mb-4">Comentarios para "nombre mascota"</h4>
                             <div class="media mb-4">
-                                <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                <img src="https://pbs.twimg.com/profile_images/1363521426574241797/QI2kSWz6.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                                 <div class="media-body">
-                                    <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                    <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
+                                    <h6>David Juanito Malan<small> - <i>01 Jan 2045</i></small></h6>
+                                    <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no
+                                        at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
                                 </div>
                             </div>
                         </div>
@@ -130,5 +133,6 @@ inicio
         </div>
     </div>
 </div>
+{% endfor %}
 <!-- Info mascota fin -->
 {% endblock %}
