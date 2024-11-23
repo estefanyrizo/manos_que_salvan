@@ -13,9 +13,12 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import login_required, subirImagen, validarDouble, validarString, subirArchivo, crearpdf
 from flask import jsonify, send_file
 from sqlalchemy.sql import text
-import helpers
+from helpers import login_required
 from flask_paginate import Pagination, get_page_parameter
 import locale
+from werkzeug.security import check_password_hash, generate_password_hash
+import datetime
+from cs50 import SQL
 
 app = Flask(__name__)
 
@@ -32,16 +35,114 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(basedir, "mano
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inicializar la extensión SQLAlchemy
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
+db = SQL("sqlite:///manos_que_salvan.db")
 
 # Rutas de la aplicación
 @app.route("/")
 def home():
     return render_template("index.html")
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register(): 
-    return render_template("register.html")
+    if request.method == "POST":
+
+        nombre_usuario = request.form.get("nombre_usuario")
+        email = request.form.get("email")
+        contrasena = request.form.get("contrasena")
+        confirmacion = request.form.get("confirmacion")
+        nombres = request.form.get("nombres")
+        apellidos = request.form.get("apellidos")
+        direccion = request.form.get("direccion")
+        biografia = request.form.get("biografia")
+        # municipio_id = request.form.get("municipio_id")      
+        
+        # print(nombre_usuario)
+        # print(email)
+        # print(contrasena )
+        # print(confirmacion)
+        # print( nombres)
+        # print(apellidos)
+        # print(direccion )
+        # print(biografia )  
+
+
+        if not nombre_usuario or not email or not contrasena or not confirmacion or not nombres or not apellidos or not direccion or not biografia:
+            # return apology("Llena todos los campos")
+            flash('Llena todos los campos', 'error')
+            return redirect("/register")
+
+        if contrasena != confirmacion:
+            # return apology("La contraseña debe ser igual a su confirmacion")
+            flash('La contraseña debe ser igual a su confirmacion', 'error')
+            return redirect("/register")
+
+        verfUsuarioExistente = db.execute("SELECT nombre_usuario from usuarios WHERE (nombre_usuario = ?)", nombre_usuario)
+        verfEmailExistente = db.execute("SELECT email from usuarios WHERE (email = ?)", email)
+
+        if len(verfUsuarioExistente) != 0:
+            # return apology("El nombre de usuario ya existe! :(")
+            flash('El nombre de usuario ya existe', 'error')
+            return redirect("/register")
+        
+        if len(verfEmailExistente) != 0:
+            # return apology("El nombre de usuario ya existe! :(")
+            flash('El email ya existe', 'error')
+            return redirect("/register")
+
+        db.execute('''
+            INSERT INTO usuarios 
+            (nombre_usuario, email, contrasena, nombres, apellidos, direccion, biografia, municipio_id, creado_en) 
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)''', nombre_usuario, email, generate_password_hash(contrasena), nombres, apellidos, direccion, biografia, '1', datetime.datetime.now())
+
+        flash('Registado exitosamente', 'exito')
+        return redirect("/register")
+
+    else:
+        return render_template("register.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    """Log user in"""
+
+    # Forget any user_id
+    session.clear()
+
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
+
+        # Ensure username was submitted
+        if not request.form.get("nombre_usuario"):
+            # return apology("Debe proveer un nombre de usuario", 403)
+            flash('Debe proveer un nombre de usuario')
+            return redirect("/login")
+
+        # Ensure password was submitted
+        elif not request.form.get("contrasena"):
+            # return apology("Debe proveer una contraseña", 403)
+            flash('Debe proveer una contraseña')
+            return redirect("/login")
+
+        # Query database for username
+        rows = db.execute("SELECT * FROM usuarios WHERE nombre_usuario = ? OR WHERE email = ? LIMIT 1", request.form.get("nombre_usuario"), request.form.get("nombre_usuario"))
+
+        # Ensure username exists and password is correct
+        if len(rows) != 1 or not check_password_hash(rows[0]["contrasena"], request.form.get("contrasena")):
+            # return apology("Credenciales Inválidas", 403)
+            flash('Credenciales Inválidas')
+            return redirect("/login")
+
+        # Remember which user has logged in
+        session["user_id"] = rows[0]["id"]
+        print('funciona dog ' + session["user_id"])
+
+        # Redirect user to home page
+        return redirect("/")
+
+    # User reached route via GET (as by clicking a link or via redirect)
+    else:
+        return render_template("login.html")
 
 @app.route("/info_mascota")
 def info_mascota(): 
@@ -71,25 +172,6 @@ def maltrato_animal():
 @login_required
 def mi_cuenta(): 
     return render_template("mi_cuenta.html")
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-
-    if request.method == "POST":
-
-        if not request.form.get("username"):
-            flash("Debe ingresar un usuario", "error")
-            return render_template("login.html")
-
-        elif not request.form.get("password"):
-            flash("Debe ingresar una contraseña", "error")
-            return render_template("login.html")
-
-        flash("Prueba de exito", "exito")
-        return redirect("/")
-
-    else:
-        return render_template("login.html")
 
 @app.route("/imagen", methods=["POST"])
 def imagen():

@@ -15,12 +15,14 @@ CREATE TABLE municipios (
 DROP TABLE IF EXISTS usuarios;
 CREATE TABLE usuarios (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
-  username TEXT NOT NULL,
+  nombre_usuario TEXT NOT NULL,
   email TEXT,
-  password TEXT NOT NULL,
-  nombre TEXT NOT NULL,
-  apellido TEXT NOT NULL,
+  contrasena TEXT NOT NULL,
+  nombres TEXT NOT NULL,
+  apellidos TEXT NOT NULL,
+  direccion TEXT NOT NULL,
   biografia TEXT NOT NULL,
+  -- codigo_postal TEXT,
   municipio_id INTEGER,
   creado_en TEXT,
   cantidad_seguidos INTEGER NOT NULL DEFAULT 0,

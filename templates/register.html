@@ -20,7 +20,7 @@ Iniciar sesi&oacute;n
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
                             <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                                aria-describedby="basic-addon1">
+                                aria-describedby="basic-addon1" name="nombre_usuario">
                         </div>
                     </div>
                     <!-- Nombre -->
@@ -29,7 +29,7 @@ Iniciar sesi&oacute;n
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
                             <input type="text" class="form-control" placeholder="Tu nombre" aria-label="Nombre"
-                                aria-describedby="basic-addon1">
+                                aria-describedby="basic-addon1" name="nombres">
                         </div>
                     </div>
 
@@ -39,7 +39,7 @@ Iniciar sesi&oacute;n
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
                             <input type="text" class="form-control" placeholder="Tus apellidos" aria-label="Apellido"
-                                aria-describedby="basic-addon1">
+                                aria-describedby="basic-addon1" name="apellidos">
                         </div>
                     </div>
 
@@ -49,7 +49,7 @@ Iniciar sesi&oacute;n
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope"></i></span>
                             <input type="email" class="form-control" placeholder="ejemplo@correo.com"
-                                aria-label="Correo" aria-describedby="basic-addon1">
+                                aria-label="Correo" aria-describedby="basic-addon1" name="email">
                         </div>
                     </div>
 
@@ -59,7 +59,7 @@ Iniciar sesi&oacute;n
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-lock"></i></span>
                             <input type="password" class="form-control" placeholder="············"
-                                aria-label="Contraseña" aria-describedby="basic-addon1">
+                                aria-label="Contraseña" aria-describedby="basic-addon1" name="contrasena">
                         </div>
                     </div>
 
@@ -69,7 +69,7 @@ Iniciar sesi&oacute;n
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-lock"></i></span>
                             <input type="password" class="form-control" placeholder="············"
-                                aria-label="Confirmar contraseña" aria-describedby="basic-addon1">
+                                aria-label="Confirmar contraseña" aria-describedby="basic-addon1" name="confirmacion">
                         </div>
                     </div>
                     <!-- Dirección -->
@@ -78,7 +78,7 @@ Iniciar sesi&oacute;n
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-home"></i></span>
                             <input type="text" class="form-control" placeholder="Tu dirección" aria-label="Dirección"
-                                aria-describedby="basic-addon1">
+                                aria-describedby="basic-addon1" name="direccion">
                         </div>
                     </div>
 
@@ -87,8 +87,9 @@ Iniciar sesi&oacute;n
                         <label for="department">Departamento</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"></i></span>
-                            <input type="text" class="form-control" placeholder="Departamento" aria-label="Departamento"
-                                aria-describedby="basic-addon1">
+                            <!-- <input type="text" class="form-control" placeholder="Departamento" aria-label="Departamento"
+                                aria-describedby="basic-addon1"> -->
+                            <select class="form-control" id="departamemto" name="departamemto"></select>
                         </div>
                     </div>
 
@@ -97,8 +98,9 @@ Iniciar sesi&oacute;n
                         <label for="municipality">Municipio</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"></i></span>
-                            <input type="text" class="form-control" placeholder="Municipio" aria-label="Municipio"
-                                aria-describedby="basic-addon1">
+                            <!-- <input type="text" class="form-control" placeholder="Municipio" aria-label="Municipio"
+                                aria-describedby="basic-addon1"> -->
+                            <select class="form-control" id="municipio" name="municipio"></select>
                         </div>
                     </div>
 
@@ -108,7 +110,7 @@ Iniciar sesi&oacute;n
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1" ><i class="fa fa-info-circle"></i></span>
                             <textarea class="form-control" placeholder="Cuéntanos un poco sobre ti..."
-                                aria-label="Sobre ti"></textarea>
+                                aria-label="Sobre ti" name="biografia" max="255"></textarea>
                         </div>
                     </div>
 
