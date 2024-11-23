@@ -80,3 +80,36 @@ def subirArchivo(archivo, nombre, folder):
 
     # print(res.response_metadata.raw)
     return res.url
+
+
+def get_departamentos_municipios_select (db_instance):
+    departamentos_municipios = db_instance.execute('''
+                                              SELECT 
+                                                    departamentos.id AS departamento_id,
+                                                    departamentos.nombre AS departamento_nombre,
+                                                    municipios.id AS municipio_id,
+                                                    municipios.nombre AS municipio_nombre
+                                                FROM 
+                                                    departamentos
+                                                INNER JOIN 
+                                                    municipios 
+                                                ON 
+                                                departamentos.id = municipios.departamento_id;
+                                              ''')
+        
+    departamentos_municipios_var = {}
+    for row in departamentos_municipios:
+        # Si el departamento no está en el diccionario, lo inicializamos con una lista vacía para 'hijos'
+        if row['departamento_nombre'] not in departamentos_municipios_var:
+            departamentos_municipios_var[row['departamento_nombre']] = {
+                'id_padre': row['departamento_id'],
+                'hijos': []  # Inicializamos 'hijos' como una lista vacía
+            }
+        
+        # Agregar los municipios como hijos (a la lista 'hijos')
+        departamentos_municipios_var[row['departamento_nombre']]['hijos'].append({
+            'id_hijo': row['municipio_id'],
+            'nombre_hijo': row['municipio_nombre']
+        })
+        
+    return departamentos_municipios_var

@@ -13,7 +13,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import login_required, subirImagen, validarDouble, validarString, subirArchivo
 from flask import jsonify, send_file
 from sqlalchemy.sql import text
-from helpers import login_required
+from helpers import login_required, get_departamentos_municipios_select
 from flask_paginate import Pagination, get_page_parameter
 import locale
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -107,36 +107,9 @@ def register():
         return redirect("/register")
 
     else:
-        departamentos_municipios = db.execute('''
-                                              SELECT 
-                                                    departamentos.id AS departamento_id,
-                                                    departamentos.nombre AS departamento_nombre,
-                                                    municipios.id AS municipio_id,
-                                                    municipios.nombre AS municipio_nombre
-                                                FROM 
-                                                    departamentos
-                                                INNER JOIN 
-                                                    municipios 
-                                                ON 
-                                                departamentos.id = municipios.departamento_id;
-                                              ''')
+        departamentos_municipios = get_departamentos_municipios_select(db)
         
-        departamentos_municipios_var = {}
-        for row in departamentos_municipios:
-            # Si el departamento no está en el diccionario, lo inicializamos con una lista vacía para 'hijos'
-            if row['departamento_nombre'] not in departamentos_municipios_var:
-                departamentos_municipios_var[row['departamento_nombre']] = {
-                    'id_padre': row['departamento_id'],
-                    'hijos': []  # Inicializamos 'hijos' como una lista vacía
-                }
-            
-            # Agregar los municipios como hijos (a la lista 'hijos')
-            departamentos_municipios_var[row['departamento_nombre']]['hijos'].append({
-                'id_hijo': row['municipio_id'],
-                'nombre_hijo': row['municipio_nombre']
-            })
-        
-        return render_template("register.html", departamentos_municipios=json.dumps(departamentos_municipios_var))
+        return render_template("register.html", departamentos_municipios=json.dumps(departamentos_municipios))
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -289,16 +262,61 @@ def mascota_encon():
 def maltrato_animal(): 
     return render_template("maltrato_animal.html")
 
-@app.route("/mi_cuenta")
+@app.route("/mi_cuenta", methods=['GET', 'PUT'])
 @login_required
 def mi_cuenta(): 
-    usuario_id = session["user_id"]
-    user_info = db.execute('''
-                           SELECT * FROM usuarios u WHERE u.id = '?'
-                           JOIN municipios m ON u.municipio_id = m.id
-                           JOIN departamentos d ON m.departamento_id = d.id
-                           ''', usuario_id)
-    return render_template("mi_cuenta.html")
+    if request.method == 'PUT':
+        email = request.form.get("email")
+        nombres = request.form.get("nombres")
+        apellidos = request.form.get("apellidos")
+        direccion = request.form.get("direccion")
+        biografia = request.form.get("biografia")
+        municipio_id = request.form.get("municipio_id")      
+        
+
+        if not email or not nombres or not apellidos or not direccion or not biografia or not municipio_id:
+            # return apology("Llena todos los campos")
+            flash('Llena todos los campos', 'error')
+            return redirect("/mi_cuenta")
+        
+        usuario_id = session.get('user_id')  # O el valor que corresponda para obtener el ID del usuario
+
+        # Realizar el UPDATE en la base de datos
+        db.execute('''
+            UPDATE usuarios
+            SET email = ?, nombres = ?, apellidos = ?, direccion = ?, biografia = ?, municipio_id = ?,
+            WHERE id = ?
+        ''', (
+            email, nombres, apellidos, direccion, biografia, municipio_id,  usuario_id
+        ))
+
+        # Después de la actualización, redirigir al usuario con un mensaje de éxito
+        flash('Datos actualizados correctamente', 'exito')
+        return redirect("/mi_cuenta")
+        
+    else:
+        usuario_id = session["user_id"]
+        user_info = db.execute('''
+                            SELECT u.nombre_usuario, u.nombres, u.apellidos, u.email, u.direccion, u.biografia, u.imagen_url,
+                            d.nombre as nombre_departamento, m.nombre as nombre_municipio, u.cantidad_seguidos, cantidad_seguidores,
+                            m.departamento_id, u.municipio_id
+                            FROM usuarios u
+                            JOIN municipios m ON u.municipio_id = m.id
+                            JOIN departamentos d ON m.departamento_id = d.id
+                                WHERE u.id = ?
+                            ''', usuario_id)
+        
+        # print(user_info)
+        publicaciones_adopcion = db.execute('''
+                                    SELECT p.id, p.nombre_mascota, r.nombre as nombre_raza , p.imagen_url FROM publicaciones as p
+                                    JOIN razas_mascotas as r ON p.raza_mascota_id = r.id
+                                    WHERE tipo_publicacion_id = 1 AND usuario_id = ?
+                                    ''', usuario_id)
+        
+        cantidad_posts = len(publicaciones_adopcion)
+        
+        departamentos_municipios = get_departamentos_municipios_select(db)
+        return render_template("mi_cuenta.html", user_info=user_info[0], publicaciones_adopcion=publicaciones_adopcion, cantidad_posts=cantidad_posts, departamentos_municipios=departamentos_municipios)
 
 @app.route("/imagen", methods=["POST"])
 def imagen():

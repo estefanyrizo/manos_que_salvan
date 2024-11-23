@@ -25,6 +25,7 @@ CREATE TABLE usuarios (
   -- codigo_postal TEXT,
   municipio_id INTEGER,
   creado_en TEXT,
+  imagen_url TEXT,
   cantidad_seguidos INTEGER NOT NULL DEFAULT 0,
   cantidad_seguidores INTEGER NOT NULL DEFAULT 0,
   FOREIGN KEY (municipio_id) REFERENCES municipios (id)
