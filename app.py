@@ -285,6 +285,12 @@ def maltrato_animal():
 @app.route("/mi_cuenta")
 @login_required
 def mi_cuenta(): 
+    usuario_id = session["user_id"]
+    user_info = db.execute('''
+                           SELECT * FROM usuarios u WHERE u.id = '?'
+                           JOIN municipios m ON u.municipio_id = m.id
+                           JOIN departamentos d ON m.departamento_id = d.id
+                           ''', usuario_id)
     return render_template("mi_cuenta.html")
 
 @app.route("/imagen", methods=["POST"])
