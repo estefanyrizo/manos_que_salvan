@@ -289,11 +289,23 @@ def maltrato_animal():
 def mi_cuenta(): 
     usuario_id = session["user_id"]
     user_info = db.execute('''
-                           SELECT * FROM usuarios u WHERE u.id = '?'
+                           SELECT u.nombre_usuario, u.nombres, u.apellidos, u.email, u.direccion, u.biografia, u.imagen_url,
+                           d.nombre as nombre_departamento, m.nombre as nombre_municipio, u.cantidad_seguidos, cantidad_seguidores
+                           FROM usuarios u
                            JOIN municipios m ON u.municipio_id = m.id
                            JOIN departamentos d ON m.departamento_id = d.id
+                            WHERE u.id = ?
                            ''', usuario_id)
-    return render_template("mi_cuenta.html")
+    
+    print(user_info)
+    publicaciones_adopcion = db.execute('''
+                                   SELECT p.id, p.nombre_mascota, r.nombre as nombre_raza , p.imagen_url FROM publicaciones as p
+                                   JOIN razas_mascotas as r ON p.raza_mascota_id = r.id
+                                   WHERE tipo_publicacion_id = 1 AND usuario_id = ?
+                                   ''', usuario_id)
+    
+    cantidad_posts = len(publicaciones_adopcion)
+    return render_template("mi_cuenta.html", user_info=user_info[0], publicaciones_adopcion=publicaciones_adopcion, cantidad_posts=cantidad_posts)
 
 @app.route("/imagen", methods=["POST"])
 def imagen():
