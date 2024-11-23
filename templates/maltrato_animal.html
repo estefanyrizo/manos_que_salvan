@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Reportar Maltrato Animal
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+    <div class="content mb-3">
+        <div class="row">
+            <!-- Un solo card para toda la información -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header m-2">
+                        <h3 class="text-center">Reportar Caso de Maltrato Animal</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Columna de la información del caso -->
+                            <div class="col-md-8">
+                                <form class="maltratoForm" action="/reportarMaltrato" method="post" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-xl-6 mb-3">
+                                            <label for="tipoAnimal">Tipo de animal</label>
+                                            <select class="form-control" id="tipoAnimal" name="tipoAnimal" required>
+                                                <option disabled="" selected="" value="">Seleccione un tipo</option>
+                                                {% for item in tipo %}
+                                                <option value="{{item[0]}}">{{item[1]}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="col-xl-6 mb-3">
+                                            <label for="descripcionFisica">Descripción física</label>
+                                            <textarea class="form-control" id="descripcionFisica" name="descripcionFisica"
+                                                placeholder="Color, tamaño, raza (si se sabe), etc." required></textarea>
+                                        </div>
+                                        <div class="col-xl-12 mb-3">
+                                            <label for="ubicacion">Ubicación del caso</label>
+                                            <input type="text" class="form-control" id="ubicacion" name="ubicacion"
+                                                placeholder="Dirección o referencia del lugar donde ocurrió el maltrato" required>
+                                        </div>
+                                        <div class="col-xl-6 mb-3">
+                                            <label for="fecha">Fecha del incidente</label>
+                                            <input type="date" class="form-control" id="fecha" name="fecha" required>
+                                        </div>
+                                        <div class="col-xl-6 mb-3">
+                                            <label for="contacto">Datos de contacto (opcional)</label>
+                                            <input type="text" class="form-control" id="contacto" name="contacto"
+                                                placeholder="Teléfono o correo electrónico">
+                                        </div>
+                                        <div class="col-xl-12 mb-1">
+                                            <label for="detalleMaltrato">Detalle del maltrato</label>
+                                            <textarea class="form-control mb-3" id="detalleMaltrato" name="detalleMaltrato"
+                                                placeholder="Descripción del maltrato observado, circunstancias, etc." required></textarea>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <!-- Columna para evidencias del caso -->
+                            <div class="col-md-4">
+                                <img id="img-preview" class="img-fluid mx-auto d-block mb-2">
+                                <label for="file">Subir evidencia (foto o video): <i class="fa fa-upload"></i></label>
+                                <input class="form-control mb-4" type="file" name="evidencia" id="img-uploader" accept="image/*,video/*">
+                                <progress id="img-upload-bar" value="0" max="100"></progress>
+                            </div>                            
+
+                            <div class="col-xl-12 form-group" align="center">
+                                <button class="btn btn-primary" type="submit">Reportar Maltrato</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

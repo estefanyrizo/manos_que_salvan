@@ -1,0 +1,354 @@
+{% extends "layout.html" %}
+
+{%block title%}
+
+Mi cuenta
+
+{% endblock%}
+
+{% block main%}
+<div class="container-fluid">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-user">
+                    <div class="card-body">
+                        <div class="author">
+                            <a href="#">
+                                <img class="avatar border-gray"
+                                    src="https://www.okchicas.com/wp-content/uploads/2018/01/Poses-para-una-buena-foto-de-perfil-15-1-701x700.jpg"
+                                    alt="...">
+                                <h5 class="title">Estefany Rizo</h5>
+                            </a>
+                        </div>
+                        <p class="description text-center">
+                            "I like the way you work it <br>
+                            No diggity <br>
+                            I wanna bag it up"
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <hr>
+                        <div class="button-container">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                                    <h5>12<br><small>Post</small></h5>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
+                                    <h5>200<br><small>Seguidores</small></h5>
+                                </div>
+                                <div class="col-lg-3 mr-auto">
+                                    <h5>24<br><small>Seguidos</small></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header m-1">
+                        <h4 class="text-center">Algo se me ocurrirá</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled team-members">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-2 col-2">
+                                        <div class="avatar">
+                                            <img src="../assets/img/faces/ayo-ogunseinde-2.jpg" alt="Circle Image"
+                                                class="img-circle img-no-padding img-responsive">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        DJ Khaled
+                                        <br />
+                                        <span class="text-muted"><small>Offline</small></span>
+                                    </div>
+                                    <div class="col-md-3 col-3 text-right">
+                                        <btn class="btn btn-sm btn btn-primary btn-round btn-icon"><i
+                                                class="fa fa-envelope" style="color:#ffffff"></i></btn>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-2 col-2">
+                                        <div class="avatar">
+                                            <img src="../assets/img/faces/joe-gardner-2.jpg" alt="Circle Image"
+                                                class="img-circle img-no-padding img-responsive">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        Creative Tim
+                                        <br />
+                                        <span class="text-success"><small>Available</small></span>
+                                    </div>
+                                    <div class="col-md-3 col-3 text-right">
+                                        <btn class="btn btn-sm btn btn-primary btn-round btn-icon"><i
+                                                class="fa fa-envelope" style="color:#ffffff"></i></btn>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card card-user pb-2">
+                    <div class="card-header m-2">
+                        <h4 class="text-center">Editar perfil</h4>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>username</label>
+                                        <input type="text" class="form-control" disabled="" placeholder="Company"
+                                            value="Creative Code Inc.">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Nombre</label>
+                                        <input type="text" class="form-control" placeholder="Nombre" value="Chet">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Apellido</label>
+                                        <input type="text" class="form-control" placeholder="Apellido" value="Faker">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Correo</label>
+                                        <input type="email" class="form-control" placeholder="Correo">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Departamento</label>
+                                        <input type="text" class="form-control" placeholder="Departamento"
+                                            value="Melbourne">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Ciudad</label>
+                                        <input type="text" class="form-control" placeholder="Ciudad" value="Australia">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Dirección</label>
+                                        <input type="text" class="form-control" placeholder="Dirección"
+                                            value="Melbourne, Australia">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Sobre mi</label>
+                                        <textarea
+                                            class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="update ml-auto mr-auto">
+                                    <button type="submit" class="btn btn-primary btn-round">Actualizar perfil</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin datos de la cuenta -->
+
+        <!-- Mascotas inicio -->
+        <div class="container-fluid pt-5">
+            <div class="text-center mb-4">
+                <h2 class="section-title px-5"><span class="px-2">Mascotas en adopci&oacute;n</span></h2>
+            </div>
+            <div class="row px-xl-5 pb-3">
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="card product-item border-0 mb-4">
+                        <div
+                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="img/product-1.jpg" alt="">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>$123.00</h6>
+                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ver
+                                mas informaci&oacute;n</a>
+                            <a href="" class="btn btn-sm text-dark p-0"><i
+                                    class="fas fa-paw text-primary mr-1"></i>Adoptar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="card product-item border-0 mb-4">
+                        <div
+                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="img/product-2.jpg" alt="">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>$123.00</h6>
+                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ver
+                                mas informaci&oacute;n</a>
+                            <a href="" class="btn btn-sm text-dark p-0"><i
+                                    class="fas fa-paw text-primary mr-1"></i>Adoptar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="card product-item border-0 mb-4">
+                        <div
+                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="img/product-3.jpg" alt="">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>$123.00</h6>
+                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ver
+                                mas informaci&oacute;n</a>
+                            <a href="" class="btn btn-sm text-dark p-0"><i
+                                    class="fas fa-paw text-primary mr-1"></i>Adoptar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="card product-item border-0 mb-4">
+                        <div
+                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="img/product-4.jpg" alt="">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>$123.00</h6>
+                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ver
+                                mas informaci&oacute;n</a>
+                            <a href="" class="btn btn-sm text-dark p-0"><i
+                                    class="fas fa-paw text-primary mr-1"></i>Adoptar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="card product-item border-0 mb-4">
+                        <div
+                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="img/product-5.jpg" alt="">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>$123.00</h6>
+                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ver
+                                mas informaci&oacute;n</a>
+                            <a href="" class="btn btn-sm text-dark p-0"><i
+                                    class="fas fa-paw text-primary mr-1"></i>Adoptar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="card product-item border-0 mb-4">
+                        <div
+                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="img/product-6.jpg" alt="">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>$123.00</h6>
+                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ver
+                                mas informaci&oacute;n</a>
+                            <a href="" class="btn btn-sm text-dark p-0"><i
+                                    class="fas fa-paw text-primary mr-1"></i>Adoptar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="card product-item border-0 mb-4">
+                        <div
+                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="img/product-7.jpg" alt="">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>$123.00</h6>
+                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ver
+                                mas informaci&oacute;n</a>
+                            <a href="" class="btn btn-sm text-dark p-0"><i
+                                    class="fas fa-paw text-primary mr-1"></i>Adoptar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="card product-item border-0 mb-4">
+                        <div
+                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="img/product-8.jpg" alt="">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>$123.00</h6>
+                                <h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ver
+                                mas informaci&oacute;n</a>
+                            <a href="" class="btn btn-sm text-dark p-0"><i
+                                    class="fas fa-paw text-primary mr-1"></i>Adoptar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mascotas fin -->
+    </div>
+</div>
+{% endblock%}

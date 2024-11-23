@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+Iniciar sesi&oacute;n
+
+{% endblock %}
+
+{% block main %}
+<div class="login-box">
+    <div class="screen-1">
+        <img class="logo" alt=""
+            src="https://static.vecteezy.com/system/resources/previews/002/373/294/original/simple-minimalism-cute-cat-icon-logo-design-vector.jpg">
+        <div class="inputs">
+            <form class="loginForm" action="/login" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-xl-12 input">
+                        <label for="username">Nombre de usuario</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+                            <input name="username" type="text" class="form-control" placeholder="lolita" aria-label="Username"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+                    <!-- Contraseña -->
+                    <div class="col-xl-12 input">
+                        <label for="password">Contraseña</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-lock"></i></span>
+                            <input name="password" type="password" class="form-control" placeholder="············"
+                                aria-label="Contraseña" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+        <!-- Botón de inicio de sesión -->
+        <button class="btn btn-primary">Iniciar sesi&oacute;n</button>
+
+        </form>
+        <!-- Footer con registro y olvido de contraseña -->
+        <div class="footer">
+            <span>¿No tienes una cuenta?</span>
+            <a href="">Registrate aquí</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
