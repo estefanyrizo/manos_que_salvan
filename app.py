@@ -67,15 +67,6 @@ def register():
         biografia = request.form.get("biografia")
         # municipio_id = request.form.get("municipio_id")      
         
-        # print(nombre_usuario)
-        # print(email)
-        # print(contrasena )
-        # print(confirmacion)
-        # print( nombres)
-        # print(apellidos)
-        # print(direccion )
-        # print(biografia )  
-
 
         if not nombre_usuario or not email or not contrasena or not confirmacion or not nombres or not apellidos or not direccion or not biografia:
             # return apology("Llena todos los campos")
@@ -153,10 +144,57 @@ def login():
 def info_mascota(): 
     return render_template("info_mascota.html")
 
-@app.route("/nueva_mascota_adop")
+@app.route("/nueva_mascota_adop", methods=['GET', 'POST'])
 @login_required
 def nueva_mascota_adop(): 
-    return render_template("nueva_mascota_adop.html")
+    if request.method == 'POST':
+        # Obtener datos del formulario
+        # titulo = request.form.get("titulo")
+        descripcion = request.form.get("descripcion")
+        imagen_url = None
+        
+        tipo_publicacion_id = 1
+        nombre_mascota = request.form.get("nombre_mascota")
+        raza_mascota_id = request.form.get("raza_mascota_id")
+        color_mascota = request.form.get("color_mascota")
+        tamano_mascota_metros = request.form.get("tamano_mascota_metros")
+        peso_mascota_kg = request.form.get("peso_mascota_kg")
+        fecha_evento_ocurrido = request.form.get("fecha_evento_ocurrido")
+        # ubicacion_evento_ocurrido = request.form.get("ubicacion_evento_ocurrido")
+        procedencia_id = request.form.get("procedencia_id")
+        
+        
+        usuario_id = session["user_id"]
+
+        # Validar que todos los campos estén llenos
+        if not all([
+            descripcion,
+            nombre_mascota, raza_mascota_id, color_mascota, tamano_mascota_metros,
+            peso_mascota_kg, fecha_evento_ocurrido, procedencia_id
+        ]):
+            flash('Todos los campos son obligatorios', 'error')
+            return redirect("/crear_publicacion_form")
+
+        # Insertar la nueva publicación
+        try:
+            db.execute('''
+                INSERT INTO publicaciones 
+                (descripcion, imagen_url, usuario_id, tipo_publicacion_id, nombre_mascota, raza_mascota_id, 
+                color_mascota, tamano_mascota_metros, peso_mascota_kg, fecha_evento_ocurrido, 
+                procedencia_id, creado_en, actualizado_en) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                descripcion, imagen_url, usuario_id, tipo_publicacion_id, nombre_mascota, raza_mascota_id,
+                color_mascota, tamano_mascota_metros, peso_mascota_kg, fecha_evento_ocurrido,
+                procedencia_id, datetime.datetime.now(), datetime.datetime.now()
+            ))
+            flash('Publicación creada exitosamente', 'exito')
+        except Exception as e:
+            flash(f'Error al crear la publicación: {e}', 'error')
+
+        return redirect("/crear_publicacion_form")
+    else:
+        return render_template("nueva_mascota_adop.html")
 
 @app.route("/registrar_mascota_desaparecida")
 @login_required

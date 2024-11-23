@@ -73,7 +73,7 @@ CREATE TABLE tipos_mascotas(
  DROP TABLE IF EXISTS publicaciones;
  CREATE TABLE publicaciones (
  	id INTEGER PRIMARY KEY AUTOINCREMENT,
-  titulo TEXT,
+  -- titulo TEXT,
   descripcion TEXT,
   imagen_url TEXT,
 	usuario_id INTEGER NOT NULL,

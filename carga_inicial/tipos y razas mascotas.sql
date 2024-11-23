@@ -1,0 +1,50 @@
+INSERT INTO tipos_mascotas (nombre, descripcion)
+VALUES
+('Perro', 'Mascotas de tipo perro.'),
+('Gato', 'Mascotas de tipo gato.'),
+('Tortuga', 'Mascotas de tipo tortuga.'),
+('Hamster', 'Mascotas de tipo hámster.'),
+('Conejo', 'Mascotas de tipo conejo.'),
+('Ave', 'Mascotas de tipo ave.');
+
+
+INSERT INTO razas_mascotas (nombre, descripcion, tipo_mascota_id)
+VALUES
+-- Razas de perros
+('Labrador Retriever', 'Raza amigable y activa.', 1),
+('Pastor Alemán', 'Raza leal y protectora.', 1),
+('Bulldog', 'Raza tranquila y cariñosa.', 1),
+('Poodle', 'Raza inteligente y juguetona.', 1),
+('Beagle', 'Raza curiosa y amigable.', 1),
+('Chihuahua', 'Raza pequeña y valiente.', 1),
+('Dálmata', 'Raza enérgica y con manchas características.', 1),
+('Golden Retriever', 'Raza amigable y versátil.', 1),
+('Siames', 'Raza con un carácter juguetón y curioso.', 2),
+('Persa', 'Raza de pelo largo y comportamiento tranquilo.', 2),
+('Maine Coon', 'Raza grande y sociable.', 2),
+('Bengalí', 'Raza con apariencia de leopardo y activa.', 2),
+('Esfinge', 'Raza sin pelo, afectuosa y curiosa.', 2),
+('Angora Turco', 'Raza elegante y juguetona.', 2),
+('Abisinio', 'Raza atlética y activa.', 2),
+('Tortuga de Orejas Rojas', 'Especie acuática muy popular.', 3),
+('Tortuga Sulcata', 'Tortuga terrestre de gran tamaño.', 3),
+('Tortuga Rusa', 'Especie terrestre pequeña y resistente.', 3),
+('Tortuga Leopardo', 'Tortuga terrestre con un caparazón decorado.', 3),
+('Tortuga de Caja', 'Tortuga terrestre con caparazón abombado.', 3),
+('Hámster Sirio', 'Hámster grande, amigable y solitario.', 4),
+('Hámster Enano Ruso', 'Hámster pequeño y sociable.', 4),
+('Hámster Roborovski', 'Hámster enano y muy activo.', 4),
+('Hámster Chino', 'Hámster con cuerpo largo y ágil.', 4),
+('Conejo Holandés', 'Raza pequeña con un patrón característico en su pelaje.', 5),
+('Conejo Cabeza de León', 'Raza con una melena distintiva alrededor de su cabeza.', 5),
+('Conejo Rex', 'Raza de pelaje corto y suave.', 5),
+('Conejo Angora', 'Raza de pelo largo y esponjoso.', 5),
+('Conejo Lop', 'Raza con orejas largas y caídas.', 5),
+('Conejo Enano', 'Raza pequeña y juguetona.', 5),
+('Canario', 'Ave conocida por su canto melodioso.', 6),
+('Periquito', 'Ave pequeña y colorida.', 6),
+('Cacatúa', 'Ave inteligente y expresiva.', 6),
+('Agapornis', 'Ave conocida como inseparable, sociable y colorida.', 6),
+('Loro Amazónico', 'Ave parlanchina y colorida.', 6),
+('Guacamayo', 'Ave grande, colorida y sociable.', 6),
+('Jilguero', 'Ave con un canto melodioso y carácter alegre.', 6);
