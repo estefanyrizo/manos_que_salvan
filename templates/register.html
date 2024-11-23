@@ -89,7 +89,7 @@ Iniciar sesi&oacute;n
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"></i></span>
                             <!-- <input type="text" class="form-control" placeholder="Departamento" aria-label="Departamento"
                                 aria-describedby="basic-addon1"> -->
-                            <select class="form-control" id="departamemto" name="departamemto"></select>
+                            <select class="form-control" id="departamento_id" name="departamento_id"></select>
                         </div>
                     </div>
 
@@ -100,7 +100,7 @@ Iniciar sesi&oacute;n
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"></i></span>
                             <!-- <input type="text" class="form-control" placeholder="Municipio" aria-label="Municipio"
                                 aria-describedby="basic-addon1"> -->
-                            <select class="form-control" id="municipio" name="municipio"></select>
+                            <select class="form-control" id="municipio_id" name="municipio_id"></select>
                         </div>
                     </div>
 
@@ -127,5 +127,10 @@ Iniciar sesi&oacute;n
         </div>
     </div>
 </div>
+
+<script>
+    const departamentos_municipios = {{ departamentos_municipios|safe }};
+    depending_selects(departamentos_municipios, 'departamento_id','municipio_id');
+</script>
 
 {% endblock %}

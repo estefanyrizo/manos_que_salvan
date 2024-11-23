@@ -19,6 +19,7 @@ import locale
 from werkzeug.security import check_password_hash, generate_password_hash
 import datetime
 from cs50 import SQL
+import json
 
 app = Flask(__name__)
 
@@ -65,10 +66,10 @@ def register():
         apellidos = request.form.get("apellidos")
         direccion = request.form.get("direccion")
         biografia = request.form.get("biografia")
-        # municipio_id = request.form.get("municipio_id")      
+        municipio_id = request.form.get("municipio_id")      
         
 
-        if not nombre_usuario or not email or not contrasena or not confirmacion or not nombres or not apellidos or not direccion or not biografia:
+        if not nombre_usuario or not email or not contrasena or not confirmacion or not nombres or not apellidos or not direccion or not biografia or not municipio_id:
             # return apology("Llena todos los campos")
             flash('Llena todos los campos', 'error')
             return redirect("/register")
@@ -94,13 +95,44 @@ def register():
         db.execute('''
             INSERT INTO usuarios 
             (nombre_usuario, email, contrasena, nombres, apellidos, direccion, biografia, municipio_id, creado_en) 
-            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)''', nombre_usuario, email, generate_password_hash(contrasena), nombres, apellidos, direccion, biografia, '1', datetime.datetime.now())
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)''', nombre_usuario, email, generate_password_hash(contrasena), nombres, apellidos, direccion, biografia, municipio_id, datetime.datetime.now())
 
         flash('Registrado exitosamente', 'exito')
         return redirect("/register")
 
     else:
-        return render_template("register.html")
+        departamentos_municipios = db.execute('''
+                                              SELECT 
+                                                    departamentos.id AS departamento_id,
+                                                    departamentos.nombre AS departamento_nombre,
+                                                    municipios.id AS municipio_id,
+                                                    municipios.nombre AS municipio_nombre
+                                                FROM 
+                                                    departamentos
+                                                INNER JOIN 
+                                                    municipios 
+                                                ON 
+                                                departamentos.id = municipios.departamento_id;
+                                              ''')
+        
+        departamentos_municipios_var = {}
+        for row in departamentos_municipios:
+            # Si el departamento no está en el diccionario, lo inicializamos con una lista vacía para 'hijos'
+            if row['departamento_nombre'] not in departamentos_municipios_var:
+                departamentos_municipios_var[row['departamento_nombre']] = {
+                    'id_padre': row['departamento_id'],
+                    'hijos': []  # Inicializamos 'hijos' como una lista vacía
+                }
+            
+            # Agregar los municipios como hijos (a la lista 'hijos')
+            departamentos_municipios_var[row['departamento_nombre']]['hijos'].append({
+                'id_hijo': row['municipio_id'],
+                'nombre_hijo': row['municipio_nombre']
+            })
+            
+        print(departamentos_municipios_var)
+        
+        return render_template("register.html", departamentos_municipios=json.dumps(departamentos_municipios_var))
 
 
 @app.route("/login", methods=["GET", "POST"])
