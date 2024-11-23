@@ -97,7 +97,7 @@ Mi cuenta
                         <h4 class="text-center">Editar perfil</h4>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form action="/mi_cuenta" method="PUT">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -129,14 +129,16 @@ Mi cuenta
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Departamento</label>
-                                        <input type="text" class="form-control" placeholder="Departamento"
-                                            value="{{ user_info.nombre_departamento }}">
+                                        <!-- <input type="text" class="form-control" placeholder="Departamento"
+                                            value="{{ user_info.nombre_departamento }}"> -->
+                                        <select class="form-control" id="departamento_id" name="departamento_id"></select>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Ciudad</label>
-                                        <input type="text" class="form-control" placeholder="Ciudad" value="{{ user_info.nombre_municipio }}">
+                                        <label>Municipio</label>
+                                        <!-- <input type="text" class="form-control" placeholder="Ciudad" value="{{ user_info.nombre_municipio }}"> -->
+                                        <select class="form-control" id="municipio_id" name="municipio_id"></select>
                                     </div>
                                 </div>
                             </div>
@@ -349,4 +351,36 @@ Mi cuenta
         <!-- Mascotas fin -->
     </div>
 </div>
+
+<script>
+    const departamentos_municipios = {{ departamentos_municipios|safe }};
+    depending_selects(departamentos_municipios, 'departamento_id', 'municipio_id');
+
+    const departamentoSeleccionado = '{{ user_info.departamento_id }}';  // Valor del departamento ya seleccionado
+    const municipioSeleccionado = '{{ user_info.municipio_id }}';  
+
+    console.log(municipioSeleccionado, departamentoSeleccionado);
+
+    const select_dpto = document.getElementById('departamento_id');
+    const select_munic = document.getElementById('municipio_id');
+
+    // Asignar el valor del departamento
+    select_dpto.value = departamentoSeleccionado;
+
+    // Crear un nuevo evento 'change' y despacharlo
+    let event = new Event('change');
+    select_dpto.dispatchEvent(event);  // Esto actualizará el select de municipios
+
+    // Esperar a que el select de municipios se actualice con las opciones correspondientes
+    // (Esto depende de cómo funcione `depending_selects`)
+    setTimeout(() => {
+        // Una vez que se haya actualizado el select de municipios, asignar el valor
+        select_munic.value = municipioSeleccionado;
+
+        // Si deseas despachar un cambio también en el select de municipio
+        select_munic.dispatchEvent(event);
+    }, 100);  // Esperar un poco (ajusta el tiempo si es necesario)
+</script>
+
+
 {% endblock%}
